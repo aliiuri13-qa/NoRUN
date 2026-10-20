@@ -1,0 +1,16 @@
+{
+  "name": "NoRUN - Workout Tracker",
+  "short_name": "NoRUN",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d1320",
+  "theme_color": "#0d1320",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

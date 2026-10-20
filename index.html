@@ -3,9 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-    <title>No RUN - Workout Tracker & Analytics</title>
+    <title>NoRUN - Workout Tracker</title>
+
+    <!-- Configurações PWA e iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="NoRUN" />
+    <link rel="apple-touch-icon" href="/icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+
     <meta name="description" content="High-performance bodybuilding & fitness tracker with real-time logging, plate calculator, recovery timer, and progress analytics." />
-    <meta property="og:title" content="No RUN - Workout Tracker & Analytics" />
+    <meta property="og:title" content="NoRUN - Workout Tracker" />
     <meta property="og:description" content="High-performance bodybuilding & fitness tracker with real-time logging, plate calculator, recovery timer, and progress analytics." />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
@@ -19,6 +27,15 @@
   <body class="bg-[#0d1320] text-[#dde2f5] min-h-screen antialiased selection:bg-[#00d2ff] selection:text-[#003543]">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+  
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js');
+        });
+      }
+    </script>
+
   </body>
 </html>
 
