@@ -1,0 +1,118 @@
+{
+  "entities": {
+    "athlete": {
+      "title": "Athlete Profile",
+      "description": "Stores user athlete profile, physical metrics and preferences",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "maxLength": 100 },
+        "email": { "type": "string", "maxLength": 120 },
+        "avatar": { "type": "string", "maxLength": 500 },
+        "weightKg": { "type": "number" },
+        "heightCm": { "type": "number" },
+        "bodyFatPercent": { "type": "number" },
+        "goal": { "type": "string", "maxLength": 100 },
+        "streakDays": { "type": "number" },
+        "streakWeeks": { "type": "number" },
+        "monthlyGoalPercent": { "type": "number" },
+        "creatineStreak": { "type": "number" },
+        "lastCreatineDate": { "type": "string", "maxLength": 20 },
+        "maxBenchPress": { "type": "number" },
+        "maxSquat": { "type": "number" },
+        "maxDeadlift": { "type": "number" },
+        "updatedAt": { "type": "string", "maxLength": 40 }
+      },
+      "required": ["name", "weightKg"]
+    },
+    "weightLog": {
+      "title": "Body Weight Log",
+      "description": "Chronological body weight tracking records",
+      "type": "object",
+      "properties": {
+        "athleteId": { "type": "string", "maxLength": 128 },
+        "weightKg": { "type": "number" },
+        "date": { "type": "string", "maxLength": 20 },
+        "notes": { "type": "string", "maxLength": 300 },
+        "createdAt": { "type": "string", "maxLength": 40 }
+      },
+      "required": ["weightKg", "date"]
+    },
+    "routine": {
+      "title": "Workout Routine",
+      "description": "User created and customizable workout routines",
+      "type": "object",
+      "properties": {
+        "letter": { "type": "string", "maxLength": 50 },
+        "name": { "type": "string", "maxLength": 100 },
+        "focus": { "type": "string", "maxLength": 100 },
+        "durationMinutes": { "type": "number" },
+        "exerciseCount": { "type": "number" },
+        "setCount": { "type": "number" },
+        "suggestedTarget": { "type": "string", "maxLength": 200 },
+        "heroImage": { "type": "string", "maxLength": 500 },
+        "exercises": { "type": "array" },
+        "updatedAt": { "type": "string", "maxLength": 40 }
+      },
+      "required": ["letter", "name"]
+    },
+    "creatineLog": {
+      "title": "Creatine Daily Check-in",
+      "description": "Daily tracking for creatine intake check-in",
+      "type": "object",
+      "properties": {
+        "athleteId": { "type": "string", "maxLength": 128 },
+        "date": { "type": "string", "maxLength": 20 },
+        "taken": { "type": "boolean" },
+        "dosageGrams": { "type": "number" },
+        "takenAt": { "type": "string", "maxLength": 40 }
+      },
+      "required": ["date", "taken"]
+    },
+    "workoutSession": {
+      "title": "Workout Session History",
+      "description": "Logged workout sessions with weights and sets completed",
+      "type": "object",
+      "properties": {
+        "dateStr": { "type": "string", "maxLength": 30 },
+        "dateFormatted": { "type": "string", "maxLength": 50 },
+        "dayBadge": { "type": "string", "maxLength": 30 },
+        "statusBadge": { "type": "string", "maxLength": 50 },
+        "statusBadgeType": { "type": "string", "maxLength": 30 },
+        "title": { "type": "string", "maxLength": 100 },
+        "subtitle": { "type": "string", "maxLength": 200 },
+        "durationMins": { "type": "number" },
+        "totalWeightKg": { "type": "number" },
+        "totalSets": { "type": "number" },
+        "rpe": { "type": "number" },
+        "notes": { "type": "string", "maxLength": 500 },
+        "calories": { "type": "number" },
+        "category": { "type": "string", "maxLength": 50 },
+        "completedExercises": { "type": "array" },
+        "createdAt": { "type": "string", "maxLength": 40 }
+      },
+      "required": ["title", "durationMins", "totalWeightKg"]
+    }
+  },
+  "firestore": {
+    "/athletes/{athleteId}": {
+      "schema": "athlete",
+      "description": "Athlete profiles"
+    },
+    "/weightLogs/{logId}": {
+      "schema": "weightLog",
+      "description": "Historical weigh-in records"
+    },
+    "/routines/{routineId}": {
+      "schema": "routine",
+      "description": "Workout divisions and exercise templates"
+    },
+    "/creatineLogs/{logId}": {
+      "schema": "creatineLog",
+      "description": "Creatine daily check-ins"
+    },
+    "/workoutSessions/{sessionId}": {
+      "schema": "workoutSession",
+      "description": "Recorded completed workouts"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "PulseFit - Workout Tracker & Analytics",
+  "description": "High-performance bodybuilding & fitness tracker with real-time logging, plate calculator, recovery timer, and progress analytics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

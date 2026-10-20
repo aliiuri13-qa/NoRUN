@@ -1,0 +1,60 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Default deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // Athlete profiles
+    match /athletes/{athleteId} {
+      allow read: if isValidId(athleteId);
+      allow create, update: if isValidId(athleteId)
+        && request.resource.data.name is string && request.resource.data.name.size() <= 100
+        && request.resource.data.weightKg is number;
+      allow delete: if isValidId(athleteId);
+    }
+
+    // Body weight logs
+    match /weightLogs/{logId} {
+      allow read: if isValidId(logId);
+      allow create, update: if isValidId(logId)
+        && request.resource.data.weightKg is number
+        && request.resource.data.date is string && request.resource.data.date.size() <= 20;
+      allow delete: if isValidId(logId);
+    }
+
+    // Workout routines
+    match /routines/{routineId} {
+      allow read: if isValidId(routineId);
+      allow create, update: if isValidId(routineId)
+        && request.resource.data.letter is string && request.resource.data.letter.size() <= 50
+        && request.resource.data.name is string && request.resource.data.name.size() <= 100;
+      allow delete: if isValidId(routineId);
+    }
+
+    // Creatine daily check-ins
+    match /creatineLogs/{logId} {
+      allow read: if isValidId(logId);
+      allow create, update: if isValidId(logId)
+        && request.resource.data.date is string && request.resource.data.date.size() <= 20
+        && request.resource.data.taken is bool;
+      allow delete: if isValidId(logId);
+    }
+
+    // Completed workout session history
+    match /workoutSessions/{sessionId} {
+      allow read: if isValidId(sessionId);
+      allow create, update: if isValidId(sessionId)
+        && request.resource.data.title is string && request.resource.data.title.size() <= 100
+        && request.resource.data.durationMins is number
+        && request.resource.data.totalWeightKg is number;
+      allow delete: if isValidId(sessionId);
+    }
+  }
+}
